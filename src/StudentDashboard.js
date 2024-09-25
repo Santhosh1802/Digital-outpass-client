@@ -15,20 +15,30 @@ const StudentDashboard = () => {
     useEffect(()=>{
         const fetchUserDetails=async()=>{
             try {
-                const res=await axios.get(process.env.REACT_APP_GET_PROFILE_API+email);
-                setUserDetails(res.data.user);
-                console.log(res.data.user);
+                await axios.get(process.env.REACT_APP_GET_PROFILE_API+email)
+                .then(Response => {
+                    setUserDetails(Response.data)
+                    console.log(Response.data)
+
+                })
+                // console.log(res)
+                // setUserDetails(res.data);
+                // console.log(userDetails)
+                // console.log("from res.data",res.data);
+                console.log(email);
+                
             } catch (err) {
                 setError("Failed to fetch user detials");
-                console.log(email,username);
+                console.log(email);
+                console.log(err);
                 
-                navigate("/editstudentprofile",{state:{email,username}});
+                navigate("/firsteditstudentprofile",{state:{email,username}});
             }
         }
         if(email){
             fetchUserDetails();
         }
-    },[email,username]);
+    },[email, navigate, username]);
     return (
         <div>
             <NavStudent email={email}/>
@@ -41,14 +51,13 @@ const StudentDashboard = () => {
                         <div>
                             <p><strong>Name:</strong> {userDetails.name}</p>
                             <p><strong>Email:</strong> {userDetails.email}</p>
-                            <p><strong>User type:</strong> {userDetails.userType}</p>
-                            <p><strong>Mobile:</strong> {userDetails.profile?.mobile || 'N/A'}</p>
-                            <p><strong>Department:</strong> {userDetails.profile?.department || 'N/A'}</p>
-                            <p><strong>Parent Name:</strong> {userDetails.profile?.parentname || 'N/A'}</p>
-                            <p><strong>Parent Mobile:</strong> {userDetails.profile?.parentmobile || 'N/A'}</p>
-                            <p><strong>Guardian Name:</strong> {userDetails.profile?.guardianname || 'N/A'}</p>
-                            <p><strong>Guardian Mobile:</strong> {userDetails.profile?.guardianmobile || 'N/A'}</p>
-                            <p><strong>Home Address:</strong> {userDetails.profile?.homeaddr || 'N/A'}</p>
+                            <p><strong>Mobile:</strong> {userDetails.mobile || 'N/A'}</p>
+                            <p><strong>Department:</strong> {userDetails.department || 'N/A'}</p>
+                            <p><strong>Parent Name:</strong> {userDetails.parent_name || 'N/A'}</p>
+                            <p><strong>Parent Mobile:</strong> {userDetails.parent_mobile || 'N/A'}</p>
+                            <p><strong>Guardian Name:</strong> {userDetails.guardian_name || 'N/A'}</p>
+                            <p><strong>Guardian Mobile:</strong> {userDetails.guardian_mobile || 'N/A'}</p>
+                            <p><strong>Home Address:</strong> {userDetails.home_addr || 'N/A'}</p>
                         </div>
                     ):(
                         <div>

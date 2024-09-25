@@ -6,9 +6,9 @@ function RequestOutpass() {
         console.log('Form submitted:', data);
       };
   return (
-    <div className='student'>
+    <div className='student text-center'>
         <h1>Request Outpass</h1>
-        <OutpassForm onSubmit={handleFormSubmit} />
+        <OutpassForm onSubmit={handleFormSubmit}/>
     </div>
   )
 }

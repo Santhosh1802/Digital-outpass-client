@@ -28,7 +28,7 @@
 }
 .student{
   height:100vh;
-  background-color: rgb(249, 237, 237);
+  background-color:rgb(249, 237, 237);
 }
 .studentnav{
   background-color:rgb(63, 65, 141);
@@ -49,6 +49,11 @@
 }
 .editstudentprofile{
   background-color: rgb(249, 237, 237);
+  height: 110vh;
+}
+.firstedit{
+  padding-top: 5vh;
   height: 100vh;
+  background:rgb(249, 237, 237);
 }
 

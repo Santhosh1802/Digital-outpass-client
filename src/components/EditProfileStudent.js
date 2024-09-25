@@ -4,13 +4,13 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { Container } from 'react-bootstrap';
 
 function EditProfileStudent({
-  name, email, mobile, department, parentname, parentmobile, guardianname, guardianmobile,homeaddr,
+  name, email, mobile, department, parent_name, parent_mobile, guardian_name, guardian_mobile,home_addr,
   onNameChange, onEmailChange, onPhoneChange, onDepartmentChange,
   onParentNameChange, onParentMobileChange, onGuardianNameChange, onGuardianMobileChange,onHomeAddrChange
 }) {
   return (
-    <div className="d-flex justify-content-center align-items-center min-vh-100">
-      <Container className="text-center" style={{ maxWidth: "500px", border: "2px solid black" }}>
+    <div className="d-flex justify-content-center align-items-center min-vh-120" style={{background:"rgb:(249, 237, 237)"}}>
+      <Container className="text-center" style={{ maxWidth: "500px"}}>
         <h1 className='mt-5'>Update Profile</h1>
         <br />
         
@@ -74,7 +74,7 @@ function EditProfileStudent({
             type='text'
             aria-label="Parent Name"
             placeholder='Enter your parent name'
-            value={parentname}
+            value={parent_name}
             onChange={(e) => onParentNameChange(e.target.value)}
             required
           />
@@ -87,7 +87,7 @@ function EditProfileStudent({
             type='number'
             aria-label="Parent Mobile"
             placeholder='Enter your parent phone number'
-            value={parentmobile}
+            value={parent_mobile}
             onChange={(e) => onParentMobileChange(e.target.value)}
             required
           />
@@ -100,7 +100,7 @@ function EditProfileStudent({
             type='text'
             aria-label="Guardian Name"
             placeholder='Enter your guardian name'
-            value={guardianname}
+            value={guardian_name}
             onChange={(e) => onGuardianNameChange(e.target.value)}
             required
           />
@@ -113,7 +113,7 @@ function EditProfileStudent({
             type='number'
             aria-label="Guardian Mobile"
             placeholder='Enter your guardian phone number'
-            value={guardianmobile}
+            value={guardian_mobile}
             onChange={(e) => onGuardianMobileChange(e.target.value)}
             required
           />
@@ -126,7 +126,7 @@ function EditProfileStudent({
             as='textarea'
             aria-label="Home Address"
             placeholder='Enter your home address'
-            value={homeaddr}
+            value={home_addr}
             onChange={(e) => onHomeAddrChange(e.target.value)}
             required
           />

@@ -17,9 +17,7 @@ function ForgotPass() {
     e.preventDefault();
     console.log(email);
     try {
-        const res=await axios.post(process.env.REACT_APP_FORGOTPASS_API,{
-          email,
-        })
+        const res=await axios.post(process.env.REACT_APP_FORGOTPASS_API+email)
         setMessage(res.data.message);
         setError('');
         console.log(res.data);
