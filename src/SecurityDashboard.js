@@ -1,9 +1,14 @@
 import React from 'react';
-
+import SecurityNav from './components/SecurityNav';
+import ScannerQR from './ScannerQR';
 const SecurityDashboard = () => {
     return (
-        <div>
-            Welcome to Security Dashboard
+        <div className='warden'>
+            <SecurityNav/>
+            <div className='text-center'>
+                <h1>Welcome Security!</h1>
+                <ScannerQR/>
+            </div>
         </div>
     );
 }

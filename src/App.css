@@ -49,11 +49,20 @@
 }
 .editstudentprofile{
   background-color: rgb(249, 237, 237);
-  height: 110vh;
+  height: 150vh;
 }
 .firstedit{
   padding-top: 5vh;
   height: 100vh;
   background:rgb(249, 237, 237);
+}
+.scanqr{
+  height: fit-content;
+  width: fit-content;
+  text-align: center;
+}
+.warden{
+  height:100vh;
+  background-color:rgb(249, 237, 237);
 }
 

@@ -4,28 +4,34 @@ import Logo from './components/Logo';
 import PasswordInput from './components/PasswordInput';
 import Submit from './components/Submit';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 function ResetPassword() {
     const [password,setPassword]=useState('');
-    const [cpassword,setCpassword]=useState('');
+    const [confirm_password,setCpassword]=useState('');
     const[error,setError]=useState('');
+    const {token}=useParams();
+    console.log(token);
+    
     const handlePasswordChange=(password)=>{
         setPassword(password);
         setError('');
     }
-    const handleCPasswordChange=(cpassword)=>{
-        setCpassword(cpassword);
+    const handleCPasswordChange=(confirm_password)=>{
+        setCpassword(confirm_password);
         setError('');
     }
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        console.log(password,cpassword);
-        if (password !== cpassword) {
+        console.log(password,confirm_password);
+        if (password !== confirm_password) {
             setError("Passwords do not match!");
             return;
         }
         try{
-            const res=await axios.post(process.env.REACT_APP_RESETPASS_API,{
+            const res=await axios.post(process.env.REACT_APP_RESETPASS_API+token,{
                 password,
+                confirm_password,
+
             })
             console.log(res.data);
         }

@@ -12,7 +12,9 @@ function NavStudent({email}) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/editstudentprofile" state={{email}} className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>Edit Profile</Nav.Link>
-            <Nav.Link href="/requestoutpass" className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>Request Outpass</Nav.Link>
+            <Nav.Link as={Link} to="/requestoutpass" state={{email}} className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>Request Outpass</Nav.Link>
+            <Nav.Link as={Link} to="/viewrequeststu" state={{email}} className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>View Request</Nav.Link>
+            <Nav.Link as={Link} to="/viewqr" state={{email}} className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>View QR</Nav.Link>
             <Nav.Link href='/' className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>

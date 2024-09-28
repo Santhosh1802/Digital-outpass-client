@@ -11,6 +11,10 @@ import EditStudentProfile from './EditStudentProfile';
 import ResetPassword from './ResetPassword';
 import RequestOutpass from './RequestOutpass';
 import FirstEditStudentProfile from './FirstEditStudentProfile';
+import ViewRequestStudent from './ViewRequestStudent';
+import ViewQR from './ViewQR';
+import ScannerQRdemo from './ScannerQR';
+import ViewHistoryWarden from './ViewHistoryWarden';
 function App() {
   
   return (
@@ -28,6 +32,10 @@ function App() {
           <Route path="/securitydashboard" element={<SecurityDashboard/>}/>
           <Route path="/editstudentprofile" element={<EditStudentProfile/>}/>
           <Route path='/firsteditstudentprofile' element={<FirstEditStudentProfile/>}/>
+          <Route path='/viewrequeststu' element={<ViewRequestStudent/>}/>
+          <Route path='/viewqr' element={<ViewQR/>}/>
+          <Route path='/scanqr' element={<ScannerQRdemo/>}/>
+          <Route path='/wardenshowhist' element={<ViewHistoryWarden/>}/>
         </Routes>
       </Router>
     </div>

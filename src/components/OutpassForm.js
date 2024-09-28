@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 
-const OutpassForm = ({ onSubmit }) => {
+const OutpassForm = ({ userId, onSubmit }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    department: '',
-    purpose: '',
-    inDateTime: '',
-    outDateTime: '',
+    reason: '',
+    in_time: '',
+    out_time: '',
+    hostel_id: userId,
   });
 
   const handleChange = (e) => {
@@ -15,15 +14,20 @@ const OutpassForm = ({ onSubmit }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    const dataToSubmit = {
+      in_time: formData.in_time,
+      out_time: formData.out_time,
+      reason: formData.reason,
+      hostel_id: userId,
+    };
+    await onSubmit(dataToSubmit);
     setFormData({
-      name: '',
-      department: '',
-      purpose: '',
-      inDateTime: '',
-      outDateTime: '',
+      reason: '',
+      in_time: '',
+      out_time: '',
+      hostel_id: userId,
     });
   };
 
@@ -32,33 +36,11 @@ const OutpassForm = ({ onSubmit }) => {
       <div style={{ maxWidth: '600px', width: '100%' }}>
         <Form onSubmit={handleSubmit}>
           <InputGroup className="mb-3">
-            <InputGroup.Text className='equal-text1'>Name</InputGroup.Text>
+            <InputGroup.Text className='equal-text1'>Reason</InputGroup.Text>
             <Form.Control
               type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </InputGroup>
-
-          <InputGroup className="mb-3">
-            <InputGroup.Text className='equal-text1'>Department</InputGroup.Text>
-            <Form.Control
-              type="text"
-              name="department"
-              value={formData.department}
-              onChange={handleChange}
-              required
-            />
-          </InputGroup>
-
-          <InputGroup className="mb-3">
-            <InputGroup.Text className='equal-text1'>Purpose</InputGroup.Text>
-            <Form.Control
-              type="text"
-              name="purpose"
-              value={formData.purpose}
+              name="reason"
+              value={formData.reason}
               onChange={handleChange}
               required
             />
@@ -68,8 +50,8 @@ const OutpassForm = ({ onSubmit }) => {
             <InputGroup.Text className='equal-text1'>Out Date & Time</InputGroup.Text>
             <Form.Control
               type="datetime-local"
-              name="outDateTime"
-              value={formData.outDateTime}
+              name="out_time"
+              value={formData.out_time}
               onChange={handleChange}
               required
             />
@@ -79,8 +61,8 @@ const OutpassForm = ({ onSubmit }) => {
             <InputGroup.Text className='equal-text1'>In Date & Time</InputGroup.Text>
             <Form.Control
               type="datetime-local"
-              name="inDateTime"
-              value={formData.inDateTime}
+              name="in_time"
+              value={formData.in_time}
               onChange={handleChange}
               required
             />

@@ -18,7 +18,7 @@ function ForgotPass() {
     console.log(email);
     try {
         const res=await axios.post(process.env.REACT_APP_FORGOTPASS_API+email)
-        setMessage(res.data.message);
+        setMessage("Reset Link Sent to your mail");
         setError('');
         console.log(res.data);
     } catch (error) {

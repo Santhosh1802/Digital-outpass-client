@@ -21,10 +21,6 @@ const StudentDashboard = () => {
                     console.log(Response.data)
 
                 })
-                // console.log(res)
-                // setUserDetails(res.data);
-                // console.log(userDetails)
-                // console.log("from res.data",res.data);
                 console.log(email);
                 
             } catch (err) {
@@ -45,10 +41,18 @@ const StudentDashboard = () => {
             <div className='student'>
                 <h1 className='text-center pt-2'>Welcome Student!</h1>
                 <Container className='text-center'>
-                    <img src='profile.jpeg' className='profile'></img>
                     {error && <p>{error}</p>}
                     {userDetails ? (
                         <div>
+                            {userDetails.profile && (
+                                <div>
+                                    <img 
+                                        src={`data:image/jpeg;base64,${userDetails.profile}`} 
+                                        alt="Profile"
+                                        style={{ width: '150px', height: '150px', borderRadius: '50%' }}
+                                    />
+                                </div>
+                            )}
                             <p><strong>Name:</strong> {userDetails.name}</p>
                             <p><strong>Email:</strong> {userDetails.email}</p>
                             <p><strong>Mobile:</strong> {userDetails.mobile || 'N/A'}</p>
