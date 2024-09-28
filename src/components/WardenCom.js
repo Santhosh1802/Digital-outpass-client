@@ -13,7 +13,7 @@ function WardenCom() {
   const fetchUserDetails = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(process.env.REACT_APP_GET_ALL_TRANSACTION_API);
+      const response = await axios.get(process.env.REACT_APP_GET_ALL_PENDING_TRANSACTION_API);
       setDetails(response.data);
       console.log(response.data);
     } catch (err) {
@@ -29,7 +29,7 @@ function WardenCom() {
 
   const handleAccept = async (id) => {
     try {
-      await axios.put(`${process.env.REACT_APP_UPDATE_TRANSACTION_STATUS_API}${id}`, {
+      await axios.put(`${process.env.REACT_APP_UPDATE_TRANSACTION_STATUS_API}${id}/accepted`, {
         status: 'Accepted'
       });
       console.log(`Request with ID ${id} accepted`);
@@ -41,7 +41,7 @@ function WardenCom() {
 
   const handleReject = async (id) => {
     try {
-      await axios.put(`${process.env.REACT_APP_UPDATE_TRANSACTION_STATUS_API}${id}`, {
+      await axios.put(`${process.env.REACT_APP_UPDATE_TRANSACTION_STATUS_API}${id}/rejected`, {
         status: 'Rejected'
       });
       console.log(`Request with ID ${id} rejected`);
@@ -52,7 +52,8 @@ function WardenCom() {
   };
   const handleViewStudent = async (studentId) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_GET_PROFILE_API}${studentId}`);
+      const response = await axios.get(`${process.env.REACT_APP_GET_PROFILE_API_ID}${studentId}`);
+      console.log(response.data)
       setSelectedStudent(response.data);
       setShowModal(true);
     } catch (err) {
@@ -87,7 +88,7 @@ function WardenCom() {
               <tbody>
                 {details.map((item) => (
                   <tr key={item.id}>
-                    <td>{item.id}</td>
+                    <td>{item.t_id}</td>
                     <td>{item.out_time}</td>
                     <td>{item.in_time}</td>
                     <td>{item.status}</td>
@@ -96,7 +97,7 @@ function WardenCom() {
                       <Button
                         variant="primary"
                         size="sm"
-                        onClick={() => handleViewStudent(item.student_id)}
+                        onClick={() => handleViewStudent(item.hostel_id)}
                         className='m-1'
                       >
                         View Student
@@ -104,7 +105,7 @@ function WardenCom() {
                       <Button
                         variant="success"
                         size="sm"
-                        onClick={() => handleAccept(item.id)}
+                        onClick={() => handleAccept(item.t_id)}
                         className='m-1'
                       >
                         Accept
@@ -112,7 +113,7 @@ function WardenCom() {
                       <Button
                         variant="danger"
                         size="sm"
-                        onClick={() => handleReject(item.id)}
+                        onClick={() => handleReject(item.t_id)}
                         className='m-1'
                       >
                         Reject
@@ -132,7 +133,7 @@ function WardenCom() {
             {selectedStudent && (
               <>
                 <img 
-                  src={`data:image/jpeg;base64,${selectedStudent.profilePicture}`} 
+                  src={`data:image/jpeg;base64,${selectedStudent.profile}`} 
                   alt="Profile" 
                   className="img-fluid mb-3"
                   width={"200px"}
