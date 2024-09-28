@@ -12,12 +12,12 @@ function RequestOutpass() {
   const handleFormSubmit = async (data) => {
     try {
       const response = await axios.post(process.env.REACT_APP_POST_OUTPASS_API, data)
-      .then((response) => {console.log(response.data)})
+      .then((response) => {console.log(response)})
       .catch((error)=>{console.log(error.response.data.error[0])})
-      console.log('Outpass request submitted successfully:', response.data);
+      
 
     } catch (error) {
-      console.log(data);
+
       
       console.log('Error submitting outpass request:', error);
       
