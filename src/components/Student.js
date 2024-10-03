@@ -33,15 +33,6 @@ const Student = () => {
     alert(`Update functionality for ${student.name} is not implemented yet.`);
   };
 
-  const handleDelete = async (studentId) => {
-    try {
-      await axios.delete(`${process.env.REACT_APP_DELETE_STUDENT_API}/${studentId}`);
-      alert('Student deleted successfully');
-      fetchStudents();
-    } catch (error) {
-      console.error('Error deleting student:', error);
-    }
-  };
 
 
   const handleSearch = async () => {
@@ -50,13 +41,18 @@ const Student = () => {
       if (searchType === 'all') {
         response = await axios.get(process.env.REACT_APP_GET_STUDENTS_API);
       } else if (searchType === 'id') {
-        response = await axios.get(`${process.env.REACT_APP_GET_STUDENT_BY_ID_API}/${searchQuery}`);
+        response = await axios.get(`${process.env.REACT_APP_GET_STUDENT_BY_ID_API}${searchQuery}`)
       } else if (searchType === 'email') {
-        response = await axios.get(`${process.env.REACT_APP_GET_STUDENT_BY_EMAIL_API}?email=${searchQuery}`);
+        response = await axios.get(`${process.env.REACT_APP_GET_STUDENT_BY_EMAIL_API}${searchQuery}`);
       } else if (searchType === 'department') {
-        response = await axios.get(`${process.env.REACT_APP_GET_STUDENTS_BY_DEPARTMENT_API}?department=${searchQuery}`);
+        response = await axios.get(`${process.env.REACT_APP_GET_STUDENTS_BY_DEPARTMENT_API}${searchQuery}`);
       }
-      setStudents(response.data);
+      if(searchType!=='id' && searchType!=='email'){
+          setStudents(response.data);
+      }
+      else{
+        setStudents([response.data]);
+      }
     } catch (error) {
       console.error('Error during search:', error);
     }
@@ -99,7 +95,8 @@ const Student = () => {
           </tr>
         </thead>
         <tbody>
-          {students.map((student) => (
+          {Array.isArray(students)?(
+          students.map((student) => (
             <tr key={student.id}>
               <td>{student.id}</td>
               <td>{student.email}</td>
@@ -111,12 +108,9 @@ const Student = () => {
                 <Button variant="warning" onClick={() => handleUpdate(student)} className="me-2">
                   Update
                 </Button>
-                <Button variant="danger" onClick={() => handleDelete(student.id)}>
-                  Delete
-                </Button>
               </td>
             </tr>
-          ))}
+          ))):(<tr><td>No Students available</td></tr>)}
         </tbody>
       </Table>
 
@@ -131,8 +125,8 @@ const Student = () => {
               <p><strong>Name:</strong> {selectedStudent.name}</p>
               <p><strong>Email:</strong> {selectedStudent.email}</p>
               <p><strong>Department:</strong> {selectedStudent.department}</p>
-              <p><strong>Phone:</strong> {selectedStudent.phone}</p>
-              <p><strong>Address:</strong> {selectedStudent.address}</p>
+              <p><strong>Phone:</strong> {selectedStudent.mobile}</p>
+              <p><strong>Address:</strong> {selectedStudent.home_addr}</p>
             </>
           )}
         </Modal.Body>

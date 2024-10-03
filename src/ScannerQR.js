@@ -8,9 +8,9 @@ function ScannerQR() {
   const [data,setData]=useState("");
   const handleScan = (result) => {
     if (result) {
-      console.log(result);
+      console.log("Scanned data:",result[0].rawValue);
       setScanEnabled(false);
-      fetchMessageFromServer(result);
+      fetchMessageFromServer(result[0].rawValue);
       setTimeout(() => {
         setScanEnabled(true);
       }, 1000);
@@ -18,14 +18,14 @@ function ScannerQR() {
   };
 
   const fetchMessageFromServer = async (scannedData) => {
-    console.log(typeof(scannedData[0].rawValue));
-    setData(scannedData[0].rawValue)
+    //console.log(typeof(scannedData[0].rawValue));
+    setData(scannedData)
     
     try {
-      const response = await axios.post(process.env.REACT_APP_POST_QR_API, JSON.parse(scannedData[0].rawValue),
+      const response = await axios.post(process.env.REACT_APP_POST_QR_API, {token:scannedData},
       );
-      console.log('Server response:', response.data);
-      setMessage(response.data);
+      console.log('Server response:', response.data.success);
+      setMessage(response.data.success);
 
     } catch (error) {
       console.error('Error fetching message from server:', error);
