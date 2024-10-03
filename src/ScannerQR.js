@@ -1,35 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Scanner } from '@yudiel/react-qr-scanner';
+import axios from 'axios';
 
 function ScannerQR() {
-  const [permissionGranted, setPermissionGranted] = useState(false);
-
-  useEffect(() => {
-    async function checkCameraPermission() {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        setPermissionGranted(true);
-        stream.getTracks().forEach(track => track.stop());
-      } catch (error) {
-        console.error('Camera permission denied:', error);
-        setPermissionGranted(false);
-      }
+  const [scanEnabled, setScanEnabled] = useState(true);
+  const [message,setMessage]=useState("");
+  const [data,setData]=useState("");
+  const handleScan = (result) => {
+    if (result) {
+      console.log(result);
+      setScanEnabled(false);
+      fetchMessageFromServer(result);
+      setTimeout(() => {
+        setScanEnabled(true);
+      }, 1000);
     }
-    checkCameraPermission();
-  }, []);
+  };
+
+  const fetchMessageFromServer = async (scannedData) => {
+    console.log(typeof(scannedData[0].rawValue));
+    setData(scannedData[0].rawValue)
+    
+    try {
+      const response = await axios.post(process.env.REACT_APP_POST_QR_API, JSON.parse(scannedData[0].rawValue),
+      );
+      console.log('Server response:', response.data);
+      setMessage(response.data);
+
+    } catch (error) {
+      console.error('Error fetching message from server:', error);
+      setMessage("error");
+    }
+  };
 
   return (
-    <div className='scanqr'>
-      <h1>ScannerQR</h1>
-      {permissionGranted ? (
+    <div>
+      {scanEnabled && (
         <Scanner
-          onScan={(result) => {
-            console.log(result);
-          }}
+          onScan={handleScan}
+          onError={(error) => console.error('Scanner error:', error)}
         />
-      ) : (
-        <p>Please allow camera access to use the QR scanner.</p>
       )}
+      {<h1>{message}</h1>}
     </div>
   );
 }

@@ -68,7 +68,7 @@ function ViewRequestStudent() {
       </thead>
       <tbody>
         <tr>
-          <td>{userDetails.id}</td>
+          <td>{userDetails.t_id}</td>
           <td>{transaction.out_time}</td>
           <td>{transaction.in_time}</td>
           <td>{transaction.status}</td>

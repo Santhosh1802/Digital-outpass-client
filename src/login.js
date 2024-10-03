@@ -28,7 +28,7 @@ const Login = () => {
                 "password": password
             })
             setError("");
-            console.log(res.data.user.user_type);
+            console.log(res.data);
             const user=res.data.user.user_type;
             if(user==='student'){
                 navigate('/studentdashboard',{state:{email:res.data.user.email,username:res.data.user.username}});

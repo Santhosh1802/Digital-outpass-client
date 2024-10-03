@@ -65,4 +65,14 @@
   height:100vh;
   background-color:rgb(249, 237, 237);
 }
-
+.security{
+  height:100vh;
+  background-color: rgb(249, 237, 237);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Scanner{
+  width: 500px;
+  height: 500px;
+}
