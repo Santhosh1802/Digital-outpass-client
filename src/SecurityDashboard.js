@@ -3,11 +3,12 @@ import SecurityNav from './components/SecurityNav';
 import ScannerQR from './ScannerQR';
 const SecurityDashboard = () => {
     return (
-        <div className='warden'>
+        <div>
             <SecurityNav/>
-            <div className='text-center'>
+            <div className='security'>
                 <h1>Welcome Security!</h1>
-                <ScannerQR/>
+                <div className='Scanner'><ScannerQR/></div>
+                
             </div>
         </div>
     );

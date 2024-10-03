@@ -9,6 +9,7 @@ function ViewQR() {
     const { email } = location.state || {};
     const [userDetails, setUserDetails] = useState("");
     const [transaction, setTransaction] = useState("");
+    const [qr,setQr]=useState("");
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -30,15 +31,29 @@ function ViewQR() {
     const fetchTransDetails = useCallback(async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`${process.env.REACT_APP_GET_QR_CODE}${1}`);
-            setTransaction(response.data);
-            console.log("Transaction details fetched:", response.data);
+            console.log(userDetails.id);
+            console.log(process.env.REACT_APP_GET_TRAN_ID)
+            const response = await axios.get(process.env.REACT_APP_GET_TRAN_ID+userDetails.id)
+            .then(response => {
+                console.log(response); 
+                console.log("from the get tran id")
+                console.log(process.env.REACT_APP_GET_QR_CODE+response.data[0].t_id)
+            
+                const newres= axios.get(process.env.REACT_APP_GET_QR_CODE+response.data[0].t_id)
+                .then(response => {console.log(response.data.QRcode);
+                    setQr(response.data.QRcode);
+                })
+                .catch( (err)=> {console.log(err)})
+            })
+            .catch( (err)=> {console.log(err)})            
+            setTransaction(response.data.t_id);
+            console.log("Transaction details fetched:", transaction);
         } catch (err) {
             console.error("Failed to fetch transaction details:", err);
         } finally {
             setLoading(false);
         }
-    },[userDetails.id]);
+    },[transaction, userDetails.id]);
 
     useEffect(() => {
         if (userDetails.id) {
@@ -52,10 +67,11 @@ function ViewQR() {
                 <Logo/>
             </div>
             <h2 className='h mt-4'>View QR</h2>
-            {transaction.QRcode && (
+            {qr && (
                 <div>
                     <img 
-                        src={`data:image/jpeg;base64,${transaction.QRcode}`} 
+                        src={`data:image/jpeg;base64,${qr}`} 
+
                         alt="QR Code"
                         style={{ width: '250px', height: '250px' }}
                     />

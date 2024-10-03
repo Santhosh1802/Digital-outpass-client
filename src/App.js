@@ -3,7 +3,6 @@ import {BrowserRouter as Router,Route,Routes} from 'react-router-dom';
 import Login from './login';
 import StudentDashboard from './StudentDashboard';
 import WardenDashboard from './WardenDashboard';
-import ManagementDashboard from './ManagementDashboard';
 import SecurityDashboard from './SecurityDashboard';
 import ForgotPass from './ForgotPass';
 import SignUp from './SignUp';
@@ -13,8 +12,11 @@ import RequestOutpass from './RequestOutpass';
 import FirstEditStudentProfile from './FirstEditStudentProfile';
 import ViewRequestStudent from './ViewRequestStudent';
 import ViewQR from './ViewQR';
-import ScannerQRdemo from './ScannerQR';
 import ViewHistoryWarden from './ViewHistoryWarden';
+import AdminDashboard from './AdminDashboard';
+import Student from './components/Student';
+import Security from './components/Security';
+import Warden from './components/Warden';
 function App() {
   
   return (
@@ -28,14 +30,16 @@ function App() {
           <Route path="/studentdashboard" element={<StudentDashboard/>}/>
           <Route path="/requestoutpass" element={<RequestOutpass/>}/>
           <Route path="/wardendashboard" element={<WardenDashboard/>}/>
-          <Route path="/managementdashboard" element={<ManagementDashboard/>}/>
+          <Route path="/admindashboard" element={<AdminDashboard/>}/>
           <Route path="/securitydashboard" element={<SecurityDashboard/>}/>
           <Route path="/editstudentprofile" element={<EditStudentProfile/>}/>
           <Route path='/firsteditstudentprofile' element={<FirstEditStudentProfile/>}/>
           <Route path='/viewrequeststu' element={<ViewRequestStudent/>}/>
           <Route path='/viewqr' element={<ViewQR/>}/>
-          <Route path='/scanqr' element={<ScannerQRdemo/>}/>
           <Route path='/wardenshowhist' element={<ViewHistoryWarden/>}/>
+          <Route path='/studentadmin' element={<Student/>}/>
+          <Route path='/securityadmin' element={<Security/>}/>
+          <Route path='/admindashboard/wardenadmin' element={<Warden/>}/>
         </Routes>
       </Router>
     </div>
