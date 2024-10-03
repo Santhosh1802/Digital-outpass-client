@@ -59,7 +59,6 @@ function ViewRequestStudent() {
     <Table striped bordered hover className='mt-2'>
       <thead>
         <tr>
-          <th>ID</th>
           <th>Out Time</th>
           <th>In Time</th>
           <th>Status</th>
@@ -68,7 +67,6 @@ function ViewRequestStudent() {
       </thead>
       <tbody>
         <tr>
-          <td>{userDetails.t_id}</td>
           <td>{transaction.out_time}</td>
           <td>{transaction.in_time}</td>
           <td>{transaction.status}</td>

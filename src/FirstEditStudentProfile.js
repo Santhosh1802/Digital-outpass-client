@@ -7,10 +7,8 @@ const FirstEditStudentProfile = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // Get username and email from location state
     const { email, username } = location.state || {};
 
-    // Initialize form state with username and email
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -51,12 +49,9 @@ const FirstEditStudentProfile = () => {
             console.log(res.data);
             setSuccess(true);
             setError('')
-    
-            
-
             navigate('/studentdashboard', { state: { email,username } });
         } catch (err) {
-            setError('Failed to update profile');
+            setError(err.response.data[0]);
             setSuccess(false);
             console.error(err);
         }

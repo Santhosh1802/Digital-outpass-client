@@ -17,6 +17,7 @@ import AdminDashboard from './AdminDashboard';
 import Student from './components/Student';
 import Security from './components/Security';
 import Warden from './components/Warden';
+import AddUser from './AddUser';
 function App() {
   
   return (
@@ -39,7 +40,8 @@ function App() {
           <Route path='/wardenshowhist' element={<ViewHistoryWarden/>}/>
           <Route path='/studentadmin' element={<Student/>}/>
           <Route path='/securityadmin' element={<Security/>}/>
-          <Route path='/admindashboard/wardenadmin' element={<Warden/>}/>
+          <Route path='/wardenadmin' element={<Warden/>}/>
+          <Route path='/adduseradmin' element={<AddUser/>}/>
         </Routes>
       </Router>
     </div>

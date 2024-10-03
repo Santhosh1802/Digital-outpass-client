@@ -13,7 +13,8 @@ function AdminNav({email}) {
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/studentadmin" state={{email}} className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>Student</Nav.Link>
             <Nav.Link as={Link} to="/securityadmin" state={{email}} className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>Security</Nav.Link>
-            <Nav.Link as={Link} to="wardenadmin" state={{email}} className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>Warden</Nav.Link>
+            <Nav.Link as={Link} to="/wardenadmin" state={{email}} className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>Warden</Nav.Link>
+            <Nav.Link as={Link} to="/adduseradmin" state={{email}} className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>Add Users</Nav.Link>
             <Nav.Link href='/' className='navlinks' style={{ color: 'rgb(249, 237, 237)' }}>Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>
