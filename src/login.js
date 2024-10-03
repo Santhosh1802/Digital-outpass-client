@@ -39,8 +39,8 @@ const Login = () => {
             else if(user==='security'){
                 navigate('/securitydashboard',{state:{email:res.data.email}})
             }
-            else if(user==='management'){
-                navigate('/managementdashboard',{state:{email:res.data.email}});
+            else if(user==='admin'){
+                navigate('/admindashboard',{state:{email:res.data.email}});
             }
         } catch (err) {
             setError('Invalid email or password');
