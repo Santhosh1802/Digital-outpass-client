@@ -13,7 +13,7 @@ function WardenCom() {
   const fetchUserDetails = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(process.env.REACT_APP_GET_ALL_PENDING_TRANSACTION_API);
+      const response = await axios.get(process.env.REACT_APP_GET_BY_STATUS_TRANSACTION_API+"pending");
       setDetails(response.data);
       console.log(response.data);
     } catch (err) {

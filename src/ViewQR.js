@@ -26,11 +26,11 @@ function ViewQR() {
             fetchUserDetails();
         }
     }, [email]);
-
+    
     const fetchTransDetails = useCallback(async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`${process.env.REACT_APP_GET_TRANS_API}${userDetails.id}`);
+            const response = await axios.get(`${process.env.REACT_APP_GET_QR_CODE}${1}`);
             setTransaction(response.data);
             console.log("Transaction details fetched:", response.data);
         } catch (err) {
@@ -52,10 +52,10 @@ function ViewQR() {
                 <Logo/>
             </div>
             <h2 className='h mt-4'>View QR</h2>
-            {transaction.qr && (
+            {transaction.QRcode && (
                 <div>
                     <img 
-                        src={`data:image/jpeg;base64,${transaction.qr}`} 
+                        src={`data:image/jpeg;base64,${transaction.QRcode}`} 
                         alt="QR Code"
                         style={{ width: '250px', height: '250px' }}
                     />
