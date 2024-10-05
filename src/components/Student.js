@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Button, Modal, Form, InputGroup } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Student = () => {
   const [students, setStudents] = useState([]);
@@ -8,6 +9,7 @@ const Student = () => {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('all');
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchStudents();
@@ -30,10 +32,8 @@ const Student = () => {
   const handleClose = () => setShowModal(false);
 
   const handleUpdate = (student) => {
-    alert(`Update functionality for ${student.name} is not implemented yet.`);
+    navigate('/editstudentprofile', { state: { email: student.email } });
   };
-
-
 
   const handleSearch = async () => {
     try {
@@ -41,16 +41,15 @@ const Student = () => {
       if (searchType === 'all') {
         response = await axios.get(process.env.REACT_APP_GET_STUDENTS_API);
       } else if (searchType === 'id') {
-        response = await axios.get(`${process.env.REACT_APP_GET_STUDENT_BY_ID_API}${searchQuery}`)
+        response = await axios.get(`${process.env.REACT_APP_GET_STUDENT_BY_ID_API}${searchQuery}`);
       } else if (searchType === 'email') {
         response = await axios.get(`${process.env.REACT_APP_GET_STUDENT_BY_EMAIL_API}${searchQuery}`);
       } else if (searchType === 'department') {
         response = await axios.get(`${process.env.REACT_APP_GET_STUDENTS_BY_DEPARTMENT_API}${searchQuery}`);
       }
-      if(searchType!=='id' && searchType!=='email'){
-          setStudents(response.data);
-      }
-      else{
+      if (searchType !== 'id' && searchType !== 'email') {
+        setStudents(response.data);
+      } else {
         setStudents([response.data]);
       }
     } catch (error) {
@@ -84,35 +83,49 @@ const Student = () => {
           Search
         </Button>
       </InputGroup>
-
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Department</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(students)?(
-          students.map((student) => (
-            <tr key={student.id}>
-              <td>{student.id}</td>
-              <td>{student.email}</td>
-              <td>{student.department}</td>
-              <td>
-                <Button variant="primary" onClick={() => handleView(student)} className="me-2">
-                  View
-                </Button>
-                <Button variant="warning" onClick={() => handleUpdate(student)} className="me-2">
-                  Update
-                </Button>
-              </td>
+      <div style={{ overflowX: 'auto' }}>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Department</th>
+              <th>Actions</th>
             </tr>
-          ))):(<tr><td>No Students available</td></tr>)}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {Array.isArray(students) ? (
+              students.map((student) => (
+                <tr key={student.id}>
+                  <td>{student.id}</td>
+                  <td>{student.email}</td>
+                  <td>{student.department}</td>
+                  <td>
+                    <Button
+                      variant="primary"
+                      onClick={() => handleView(student)}
+                      className="me-2"
+                    >
+                      View
+                    </Button>
+                    <Button
+                      variant="warning"
+                      onClick={() => handleUpdate(student)}
+                      className="me-2"
+                    >
+                      Update
+                    </Button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td>No Students available</td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </div>
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>

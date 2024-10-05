@@ -56,6 +56,7 @@ function ViewRequestStudent() {
     </div>
     <h2 className='h mt-4'>Request Status</h2>
     <Container className="text-center" style={{maxWidth:"650px"}}>
+    <div style={{overflowX:'auto'}}>
     <Table striped bordered hover className='mt-2'>
       <thead>
         <tr>
@@ -74,6 +75,7 @@ function ViewRequestStudent() {
         </tr>
       </tbody>
     </Table>
+    </div>
     </Container>
     </div>
     </>

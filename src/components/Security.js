@@ -29,6 +29,7 @@ const Security = () => {
   return (
     <div className="p-5 student">
       <h2>Admin - Security Information</h2>
+      <div style={{overflowX:'auto'}}>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -53,6 +54,7 @@ const Security = () => {
           ))}
         </tbody>
       </Table>
+      </div>
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>

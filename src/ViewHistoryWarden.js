@@ -32,11 +32,12 @@ function ViewHistoryWarden() {
         <div className='mt-5'>
           <Logo/>
         </div>
-        <h2 className='h mt-4'>Student Outpass History</h2>
+        <h2 className='m mt-4'>Student Outpass History</h2>
         <Container className="text-center" style={{ maxWidth: "850px" }}>
           {loading ? (
             <Loading/>
           ) : (
+            <div style={{overflowX:'auto'}}>
             <Table striped bordered hover className='mt-2'>
               <thead>
                 <tr>
@@ -63,6 +64,7 @@ function ViewHistoryWarden() {
                 ))}
               </tbody>
             </Table>
+            </div>
           )}
         </Container>
       </div>

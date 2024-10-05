@@ -70,10 +70,11 @@ function WardenCom() {
     <>
       <div className='d-flex flex-column min-vh-100'>
         <h2 className='mt-4' style={{textAlign:"center"}}>Student Requests</h2>
-        <Container className="text-center" style={{ maxWidth: "850px" }}>
+        <Container className="text-center">
           {loading ? (
             <Loading/>
           ) : (
+            <div style={{overflowX:'auto'}}>
             <Table striped bordered hover className='mt-2'>
               <thead>
                 <tr>
@@ -123,6 +124,7 @@ function WardenCom() {
                 ))}
               </tbody>
             </Table>
+            </div>
           )}
         </Container>
         <Modal show={showModal} onHide={handleCloseModal}>
