@@ -4,6 +4,7 @@ import PasswordInput from './components/PasswordInput';
 import Submit from './components/Submit';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function ResetPassword() {
     const [password,setPassword]=useState('');
     const [confirm_password,setCpassword]=useState('');
@@ -11,6 +12,7 @@ function ResetPassword() {
     const[error,setError]=useState('');
     const {token}=useParams();
     console.log(token);
+    const navigate=useNavigate();
     
     const handlePasswordChange=(password)=>{
         setPassword(password);
@@ -34,7 +36,10 @@ function ResetPassword() {
 
             })
             console.log(res.data);
-            setMessage("Password changed successfully!")
+            setMessage("Password changed successfully!");
+            setTimeout(function() {
+                navigate("/");
+            }, 2000);            
         }
         catch(error){
             console.log(error);

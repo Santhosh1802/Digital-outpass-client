@@ -8,6 +8,7 @@ function EditStudentProfile() {
   const location = useLocation();
   const { email } = location.state || {};
   const [message, setMessage] = useState("");
+  const [error,setError]=useState("");
 
   const [profileData, setProfileData] = useState({
     name: "",
@@ -28,6 +29,8 @@ function EditStudentProfile() {
       if (email) {
         try {
           const response = await axios.get(`${process.env.REACT_APP_GET_PROFILE_API}${email}`);
+          //console.log(response.data.profile);
+          
           setProfileData({
             name: response.data.name,
             email: response.data.email,
@@ -43,6 +46,7 @@ function EditStudentProfile() {
           });
         } catch (error) {
           console.log("Error fetching data", error);
+          setError()
         }
       }
     };
@@ -56,14 +60,25 @@ function EditStudentProfile() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(profileData);
-    
     try {
       const response = await axios.put(`${process.env.REACT_APP_UPDATE_PROFILE_API}${profileData.id}`, profileData);
       setMessage("Profile updated Successfully");
+      setError(" ");
       console.log(response.data);
       
     } catch (error) {
       console.log("Error updating profile", error);
+      setError(error.response.data[0]);
+      console.log(error.response.data[0]);
+      let data=error.response.data;
+      for (const key in data) {
+        if (Array.isArray(data[key])) {
+          const valueAtIndexZero = data[key][0];
+          console.log(`${key}: ${valueAtIndexZero}`);
+          setError(valueAtIndexZero);
+        }
+      }
+      
     }
   };
 
@@ -95,7 +110,8 @@ function EditStudentProfile() {
               onProfileChange={handleProfileChange} 
             />
             <div className="text-center" style={{ background: "rgb(249, 237, 237)" }}>
-              <p>{message}</p>
+              <p style={{color:'green'}}>{message}</p>
+              <p style={{color:'red'}}>{error}</p>
               <Submit />
             </div>
           </form>

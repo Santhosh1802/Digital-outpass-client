@@ -4,7 +4,6 @@ import UserName from './components/UserName';
 import { Form, Container, Button, InputGroup } from 'react-bootstrap';
 import Logo from './components/Logo.js';
 import axios from 'axios';
-import Loading from './components/Loading.js';
 
 function AddUser() {
   const [username, setUserName] = useState('');
@@ -47,7 +46,7 @@ function AddUser() {
     e.preventDefault();
     
     try {
-      if (user_type === 'Student') {
+      if (user_type === 'student') {
         await axios.post(process.env.REACT_APP_SIGNUP_API, {
           username,
           email,
@@ -57,8 +56,8 @@ function AddUser() {
         setSuccess('Student added successfully.');
         setError('');
       } 
-      else if (user_type === 'Warden' || user_type === 'Security') {
-        const specificApi = user_type === 'Warden' 
+      else if (user_type === 'warden' || user_type === 'security') {
+        const specificApi = user_type === 'warden' 
           ? process.env.REACT_APP_WARDEN_API 
           : process.env.REACT_APP_SECURITY_API;
   
@@ -94,9 +93,9 @@ function AddUser() {
           <Form.Group className='mb-3'>
             <Form.Label>Select User Type</Form.Label>
             <Form.Control as='select' value={user_type} onChange={handleUserTypeChange}>
-              <option value='Student'>Student</option>
-              <option value='Warden'>Warden</option>
-              <option value='Security'>Security</option>
+              <option value='student'>Student</option>
+              <option value='warden'>Warden</option>
+              <option value='security'>Security</option>
             </Form.Control>
           </Form.Group>
           <Form.Group>
@@ -107,7 +106,7 @@ function AddUser() {
             <UserIdPass onEmailChange={handleEmailChange} onPasswordChange={handlePasswordChange} />
           </Form.Group>
 
-          {(user_type === 'Warden' || user_type === 'Security') && (
+          {(user_type === 'warden' || user_type === 'security') && (
   <>
     <Form.Group className='form-field'>
       <Form.Label>Upload Profile Photo</Form.Label>
@@ -152,7 +151,6 @@ function AddUser() {
           {success && (
             <p className='text-success'>
               <br />
-              {/* <Loading /> */}
               <br />
               {success}
             </p>

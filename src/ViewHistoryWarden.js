@@ -53,7 +53,7 @@ function ViewHistoryWarden() {
               <tbody>
                 {details.map((item) => (
                   <tr key={item.id}>
-                    <td>{item.id}</td>
+                    <td>{item.t_id}</td>
                     <td>{item.out_time}</td>
                     <td>{item.in_time}</td>
                     <td>{item.actual_out_time}</td>
